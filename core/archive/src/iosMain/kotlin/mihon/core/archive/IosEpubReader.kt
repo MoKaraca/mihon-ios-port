@@ -25,8 +25,8 @@ class IosEpubReader(
     fun getPackageHref(): String {
         val metaBytes = reader.readEntryBytes(resolveZipPath("META-INF", "container.xml"))
         if (metaBytes != null) {
-            val metaDoc = Ksoup.parse(metaBytes.decodeToString(), "", Parser.xmlParser())
-            val path = metaDoc.getElementsByTag("rootfile").first()?.attr("full-path")
+            val metaDoc = Ksoup.parse(html = metaBytes.decodeToString(), parser = Parser.xmlParser(), baseUri = "")
+            val path = metaDoc.select("rootfile").firstOrNull()?.attr("full-path")
             if (!path.isNullOrBlank()) {
                 return path
             }
@@ -36,7 +36,7 @@ class IosEpubReader(
 
     fun getPackageDocument(ref: String): Document? {
         val bytes = reader.readEntryBytes(ref) ?: return null
-        return Ksoup.parse(bytes.decodeToString(), "", Parser.xmlParser())
+        return Ksoup.parse(html = bytes.decodeToString(), parser = Parser.xmlParser(), baseUri = "")
     }
 
     private fun getPagesFromDocument(document: Document): List<String> {

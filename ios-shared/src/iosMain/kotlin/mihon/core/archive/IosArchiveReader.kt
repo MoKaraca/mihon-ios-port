@@ -6,6 +6,7 @@ import okio.Path
 import okio.Path.Companion.toPath
 import okio.buffer
 import okio.openZip
+import okio.use
 
 /**
  * Multiplatform iOS ArchiveReader supporting `.cbz`, `.zip`, and `.epub` archives via Okio's

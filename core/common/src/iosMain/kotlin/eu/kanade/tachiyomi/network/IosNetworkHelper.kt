@@ -20,6 +20,7 @@ import kotlinx.coroutines.sync.withLock
 import platform.Foundation.NSHTTPCookie
 import platform.Foundation.NSHTTPCookieStorage
 import platform.Foundation.NSURL
+import platform.Foundation.timeIntervalSince1970
 import platform.WebKit.WKWebsiteDataStore
 import tachiyomi.core.common.preference.PreferenceStore
 

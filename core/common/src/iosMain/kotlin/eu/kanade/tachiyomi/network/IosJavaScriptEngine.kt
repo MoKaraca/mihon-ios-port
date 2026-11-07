@@ -54,7 +54,7 @@ class IosJavaScriptEngine {
             throw IllegalStateException("JavaScript module load failed: $jsExceptionMessage")
         }
 
-        val fn = context.objectForKeyedSubscript(functionName)
+        val fn = context.evaluateScript(functionName)
         val result = fn?.callWithArguments(args)
         if (jsExceptionMessage != null) {
             throw IllegalStateException("JavaScript function '$functionName' failed: $jsExceptionMessage")

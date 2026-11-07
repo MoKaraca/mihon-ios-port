@@ -12,6 +12,7 @@ import okio.GzipSink
 import okio.GzipSource
 import okio.Path
 import okio.buffer
+import okio.use
 
 /**
  * 100% binary-compatible Mihon `.tachibk` / `.proto.gz` Backup Creator and Restorer for iOS.
