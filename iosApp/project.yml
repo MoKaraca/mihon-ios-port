@@ -1,0 +1,59 @@
+name: Mihon
+options:
+  bundleIdPrefix: app.mihon
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "16.0"
+
+settings:
+  base:
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+    OTHER_LDFLAGS:
+      - $(inherited)
+      - -lsqlite3
+
+targets:
+  Mihon:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: iosApp
+    info:
+      path: iosApp/Info.plist
+    entitlements:
+      path: iosApp/Mihon.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.mihon.ios
+        PRODUCT_NAME: Mihon
+        INFOPLIST_FILE: iosApp/Info.plist
+        CODE_SIGN_ENTITLEMENTS: iosApp/Mihon.entitlements
+        FRAMEWORK_SEARCH_PATHS:
+          - $(inherited)
+          - $(SRCROOT)/../ios-shared/build/bin/iosArm64/releaseFramework
+          - $(SRCROOT)/../ios-shared/build/bin/iosSimulatorArm64/debugFramework
+          - $(SRCROOT)/../ios-shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
+        OTHER_LDFLAGS:
+          - $(inherited)
+          - -framework
+          - MihonShared
+          - -lsqlite3
+    dependencies:
+      - target: UpdatesWidget
+
+  UpdatesWidget:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: UpdatesWidget
+    info:
+      path: UpdatesWidget/Info.plist
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.mihon.ios.UpdatesWidget
+        PRODUCT_NAME: UpdatesWidget
+        INFOPLIST_FILE: UpdatesWidget/Info.plist
+        SKIP_install: YES
+
